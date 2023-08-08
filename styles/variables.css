@@ -1,0 +1,26 @@
+
+
+:root {
+    /* las fuentes usadas a lo largo del website */
+    --primary-font: 'chivo_normal';
+    --soft-title-font: 'poppins_medium';
+    --bold-font: 'poppins_bold';
+    /* estas variables son los colores que se usan a lo largo de la pagina en el light mode */
+    --primary-color: #eb4a5a;
+    --secondary-color: #274672;
+    --color-base: #f6f6f6;
+    --color-base-dark: #274672;
+    --primary-color-dark:#142351;
+    /* estas dos variables juntas mantiene el mismo padding en cada caja */
+        /* (breakpoints sm) */
+    --padding-X: 0 30px;
+    --forced-contain: border-box;
+        /* (breakpoints md+) */
+    --padding-X2: 0 50px;
+    --forced-contain: border-box;
+    /* manejar un margen constante de 25px entre elementos del mismo contenedor */
+        /* (breakpoints sm) */
+    --margin-Y: 25px 0;
+    /* (breakpoints md+) */
+    --margin-Y2: 50px 0;
+}

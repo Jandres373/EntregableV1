@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/normalize.css">
+    <link rel="stylesheet" href="/styles/variables.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="/styles/nav_bar.css">
+    <link rel="stylesheet" href="/styles/banner_section.css">
+    <link rel="stylesheet" href="/styles/products_section.css">
+    <link rel="stylesheet" href="/styles/footer_section.css">
+    <script src="https://kit.fontawesome.com/fb4411fbfb.js" crossorigin="anonymous" defer></script>
+    <script src="/app/main.js" defer></script>
+    <script src="/app/products.js" defer></script>
+    <title>Academlo</title>
+</head>
+<body>
+<!-- Seccion donde se despliega el navBar -->
+    <header>
+        <nav id="get_navBar" class="theme" >
+            <!-- Aquí va el icono y el texto de academlo -->
+            <div  class="themeContent navBar_logo_and_text">
+                <img src="/assets/logo.jpg" alt="">
+                <h1>Academlo</h1>
+            </div>
+            <!-- Aquí se desarrolla el toggle de darkMode -->
+            <div class="navBar_cart_and_toggle">
+                <div id="get_toggle" class="nav_toggle_mode_box">
+                    <div class="nav_toggle_icon">
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
+                </div>
+                <!-- Conectar aquí el carrito -->
+                <i class="themeContent fa-brands fa-opencart">
+                    <div class="navBar_cart_badge">0</div>
+                </i>
+            </div>
+        </nav>
+    </header>
+<!-- Seccion donde se despliega el banner con el logo de Academlo -->
+    <section  class="banner banner_section">
+        <!-- <img class="hexagon" src="/assets/nnneon.svg" alt=""> -->
+        <svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 300 300"><path class="idk" fill="none" stroke="#3f5787" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" d="M136.97 50.442 75.164 215.079m23.9.001 17.273-48.65m-10.27-27.988h66.813m-33.486-88 63.218 164.637m0 0h22.224m-149.672 0H98.31m126.526-1.89L161.81 47.942"/></svg>
+    </section>
+<!-- Seccion donde se despliega el area principal (productos) -->
+    <main id="get_main" class="theme">
+        <div  class="main_products_title_container">
+            <h2 class="themeContent" >All our products</h2>
+            <div class="main_products_select_menu">
+                <select class="themeContent" name="products" title="products" id="products">
+                    <option  value="product">Product</option>
+                </select>
+            </div>
+        </div>
+        <div id="get_products" class="main_products_display_container">
+        
+                <!-- conectar aquí los productos con la id get_products  -->
+            
+        </div>
+        <div class="main_products_btn_container">
+            <button class="themeContent main_products_btn" type="button">More products</button>
+        </div>
+    </main>
+<!-- Seccion donde se despliega el footer -->
+    <footer class="footer">
+        <div class="footer_container">
+            <img class="hexagon" src="/assets/nnneon.svg" alt="">
+            <h4>Team 4</h4>
+            <h5>Academlo gen29</h5>
+            <div class="footer_developers_container">
+                <h6 class="">This site was developed by</>
+                <div class="footer_developers">
+                    <p>Annibal Meza </p>
+                    <p>Edwin Mejía </p>
+                    <p>Joseph Cardenas </p>
+                    <p>Julian Mosquera </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

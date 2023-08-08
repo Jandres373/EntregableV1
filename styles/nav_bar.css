@@ -1,0 +1,83 @@
+nav {
+    width: 100%;
+    height: 50px;
+    background-color: var(--color-base);
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding: var(--padding-X);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    transition: 1s;
+}
+    .navBar_logo_and_text {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: var(--primary-color);
+        font-weight: 900;
+        font-size: 20px;
+    }
+    .navBar_logo_and_text img{
+        width: 25px;
+        
+    }
+    .navBar_cart_and_toggle{
+        width: 110px;
+        display: flex;
+        gap: 10px;
+    
+    }
+        .nav_toggle_mode_box {
+            width: 56px;
+            height: 30px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            box-sizing: border-box;
+            background-color: rgba(222, 216, 216, 0.992);
+            justify-content: start;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+            .nav_toggle_icon{
+                width: 25px;
+                height: 25px;
+                padding: 12px;
+                box-sizing: border-box;
+                background-color: var(--secondary-color);
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .fa-moon{
+                color: var(--color-base);
+                font-size: 15px;
+                display: grid;
+                place-items: center;
+            }
+            .fa-opencart {
+                color: var(--secondary-color);
+                font-size: 25px;
+                cursor: pointer;
+                position: relative;
+            }
+            .navBar_cart_badge{
+                width: 15px;
+                height: 15px;
+                position: absolute;
+                font-size: 10px;
+                top: -5px;
+                right: -15px;
+                background-color: var(--color-base);
+                color: var(--secondary-color);
+                font-weight: 900;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+            }

@@ -1,0 +1,24 @@
+.banner_section{
+    width: 100%;
+    height: 400px;
+    background-color:  var(--primary-color);
+    display: grid;
+    place-items: center;
+    
+}
+svg {
+    width: 205px;
+    height: 205px;
+}
+svg .idk {
+    stroke: var(--color-base);
+    animation: logoAnimation 5s ease-out forwards;
+    stroke-dashoffset: 500;
+    stroke-dasharray: 500;
+}
+
+@keyframes logoAnimation {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
