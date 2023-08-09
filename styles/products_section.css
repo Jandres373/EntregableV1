@@ -12,12 +12,12 @@ main {
         justify-content: space-between;
         align-items: center;
         margin: var(--margin-Y);
-        font-family: var(--soft-title-font);
+        font-family: var();
     }
         .main_products_select_menu select{
             width: 150px;
             height: 40px;
-            font-family: var(--soft-title-font);
+            font-family: var();
             border-radius: 2px;
             border: 1px solid var(--secondary-color);
             background-color: transparent;
@@ -57,7 +57,7 @@ main {
             margin: var(--margin-Y);
         }
             .main_products_btn{
-                font-family: var(--soft-title-font);
+                font-family: var();
                 padding: 10px;
                 border: 1px solid var(--secondary-color);
                 background-color: transparent;

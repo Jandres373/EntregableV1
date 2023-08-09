@@ -17,12 +17,12 @@ footer {
     }
         .footer_container h4{
             margin-top: 20px;
-            font-family: var(--bold-font);
+            font-family: var();
             font-size: 30px;
             color: var(--color-base);
         }
         .footer_container h5{
-            font-family: var(--bold-font);
+            font-family: var();
             font-size: 15px;
             color: var(--color-base);
         }
@@ -43,7 +43,7 @@ footer {
         } 
 
         .footer_developers_container p{
-            font-family: var(--primary-font);
+            font-family: var();
             font-size: 10px;
         }
         .footer_developers_container .footer_developers{
