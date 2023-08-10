@@ -1,3 +1,4 @@
+/* font-face nos permite importar las fuentes que usaremos en el proyecto */
 @font-face {
     font-family: 'Helvetica Neue, Medium';
     src: url(/assets/fonts/PragmaticaMedium.otf);
@@ -6,6 +7,8 @@
     font-family: 'Helvetica Neue, Bold';
     src: url(/assets/fonts/FreeSansBold.otf);
 }
+
+/* Establecemos variables css para guardar fuentes, colores, tamaños y margenes y tener mayor consistencia y facilidad para realizar cambios en los estilos a lo largo del codigo. */
 :root {
     /* las fuentes usadas a lo largo del website */
     --font-main-title: 'Helvetica Neue, Medium';
@@ -18,14 +21,19 @@
     --primary-color: #eb4a5a;
     --secondary-color: #274672;
     --color-base: #f6f6f6;
-    --primary-color-dark:#142351;
-    --color-base-dark: #2b356e;
+    /* --primary-color-dark:#142351; */
+    --primary-color-dark:#131f42;
+    /* --color-base-dark: #2b356e; */
+    --color-base-dark: #1e254f;
     /* estas dos variables juntas mantiene el mismo padding en cada caja */
         /* (breakpoints sm) */
     --padding-X: 0 30px;
     --forced-contain: border-box;
         /* (breakpoints md+) */
     --padding-X2: 0 50px;
+    --forced-contain: border-box;
+        /* breakpoint lg */
+        --padding-X3: 0 100px;
     --forced-contain: border-box;
     /* manejar un margen constante de 25px entre elementos del mismo contenedor */
         /* (breakpoints sm) */

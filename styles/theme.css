@@ -1,3 +1,5 @@
+/* Aquí se controlan las clases para desplegar los temas que tiene la pagina y permite tener consistencia en ellos al usar las variables definidas anteriormente */
+
 /* red mode */
 .red_mode {
   background-color: var(--primary-color);

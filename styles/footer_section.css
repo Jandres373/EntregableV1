@@ -40,6 +40,7 @@ footer {
             object-fit: contain;
             box-sizing: border-box;
             overflow: hidden;
+            visibility: hidden;
         } 
 
         .footer_developers_container p{
@@ -67,3 +68,158 @@ footer {
         
     }
 }
+
+
+/* animacion del banner */
+.glowing {
+  visibility: hidden;
+}
+.glowing span {
+    position: absolute;
+    top: calc(20px * var(--i));
+    left: calc(80px * var(--i));
+    bottom: calc(80px * var(--i));
+    right: calc(80px * var(--i));
+  }
+  
+  .glowing span::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -8px;
+    width: 3px;
+    height: 3px;
+    background: #f00;
+    border-radius: 50%;
+  }
+  
+  .glowing span:nth-child(3n + 1)::before {
+    background: rgb(171, 180, 161);
+    box-shadow: 0 0 20px rgb(171, 180, 161),
+      0 0 10px rgb(171, 180, 161),
+      0 0 20px rgb(171, 180, 161),
+      0 0 30px rgb(171, 180, 161),
+      0 0 0 2px rgba(134,255,0,.1);
+  }
+  
+  .glowing span:nth-child(3n + 2)::before {
+    background: rgba(255,214,0,1);
+    box-shadow: 0 0 20px rgba(255,214,0,1),
+      0 0 10px rgba(255,214,0,1),
+      0 0 20px rgba(255,214,0,1),
+      0 0 30px rgba(255,214,0,1),
+      0 0 0 2px rgba(255,214,0,.1);
+  }
+  
+  .glowing span:nth-child(3n + 3)::before {
+    background: rgba(0,226,255,1);
+    box-shadow: 0 0 20px rgba(0,226,255,1),
+      0 0 10px rgba(0,226,255,1),
+      0 0 20px rgba(0,226,255,1),
+      0 0 30px rgba(0,226,255,1),
+      0 0 0 2px rgba(0,226,255,.1);
+  }
+  
+  .glowing span:nth-child(3n + 1) {
+    animation: animate 30s alternate infinite;
+  }
+  
+  .glowing span:nth-child(3n + 2) {
+    animation: animate-reverse 10s alternate infinite;
+  }
+  
+  .glowing span:nth-child(3n + 3) {
+    animation: animate 18s alternate infinite; 
+  }
+
+  .glowing span:nth-child(3n + 4) {
+    animation: animate 11s alternate infinite; 
+  }
+
+  .glowing span:nth-child(3n + 5) {
+    animation: animate 8s alternate infinite; 
+  }
+  
+  @keyframes animate {
+    0% {
+      transform: translateX(780px);
+      opacity: 1;
+    }
+    10% {
+      
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+    50% {
+      transform: translateX(50px);
+      opacity: 0;
+    }
+    60% {
+        opacity: 0;
+    }
+    70% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 0;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+      transform: translateX(1360px);
+      opacity: 1;
+    }
+}
+  
+  @keyframes animate-reverse {
+    0% {
+        transform: translateX(180px);
+        opacity: 1;
+      }
+      10% {
+          opacity: 0;
+      }
+      20% {
+          opacity: 1;
+      }
+      30% {
+          opacity: 0;
+      }
+      40% {
+          opacity: 1;
+      }
+      50% {
+        transform: translateX(50px);
+        opacity: 1;
+      }
+      60% {
+        opacity: 0;
+    }
+    70% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 0;
+    }
+    90% {
+        opacity: 1;
+    }
+      100% {
+        transform: translateX(360px);
+        opacity: 0;
+      }
+  }
+
+  .activate_dark_mode_additions {
+    visibility: visible;
+  }
+  

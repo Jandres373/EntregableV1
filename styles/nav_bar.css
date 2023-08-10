@@ -4,7 +4,7 @@ nav {
     background-color: var(--color-base);
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
-    padding: var(--padding-X);
+    padding: var(--padding-X2);
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
@@ -97,6 +97,7 @@ nav {
 
             @media (max-width: 768px)  {
                 nav {
+                    padding: var(--padding-X);
                     border-radius: 0px;
                 }
             }

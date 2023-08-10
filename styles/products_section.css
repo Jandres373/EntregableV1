@@ -4,7 +4,8 @@ main {
     display: flex;
     flex-direction: column;
     height: 800px;
-    padding: var(--padding-X);
+    padding: var(--padding-X2);
+    box-sizing: var(--forced-contain);
     box-sizing: var(--forced-contain);
 }
     .main_products_title_container {
@@ -12,6 +13,7 @@ main {
         justify-content: space-between;
         align-items: center;
         margin: var(--margin-Y);
+        padding: var(--padding-X3);
         font-family: var();
     }
         .main_products_select_menu select{
@@ -27,28 +29,24 @@ main {
         /* border: 1px dashed var(--secondary-color); */
         width: 100%;
         
-        padding: var(--padding-X);
+        padding: var(--padding-X3);
         box-sizing: var(--forced-contain);
         
         display: grid;
         grid-template-columns: repeat(5,1fr);
         flex-wrap: wrap;
-        gap: 20px;
+        
 
         overflow: hidden;
     }
         .products_display {
             margin: var(--margin-Y);
-            width: 250px;
+            width: 200px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             background-color: transparent;
             cursor: pointer;   
-
-            backdrop-filter: blur(19px);
-            -webkit-backdrop-filter: blur(19px);
-            
             
         }
             .products_display button {
@@ -88,7 +86,7 @@ main {
                 
             }
             .product_view:hover {
-                background-color: rgba(21, 21, 92, 0.068);
+                background-color: rgba(21, 21, 92, 0.99);
             }
             .product_confirm {
                 
@@ -101,4 +99,26 @@ main {
                 height: 100%;
                 
                 
+            }
+
+            @media (max-width: 768px) {
+                main {
+                    height: 1500px;
+                    padding: var(--padding-X2);
+                }
+                .main_products_title_container {
+                    padding: var(--padding-X);
+                    
+                }
+                .main_products_display_container {
+                    padding: var(--padding-X);
+                    box-sizing: var(--forced-contain);
+                    grid-template-rows: repeat(5,1fr);
+                    grid-template-columns: repeat(2,1fr);
+                    gap: 20px;
+                }
+
+                .products_display {
+                    width: 150px;
+                }
             }

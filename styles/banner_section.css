@@ -1,17 +1,21 @@
 .banner_section{
     width: 100%;
-    height: 400px;
+    height: 350px;
     background-color:  var(--primary-color);
     display: grid;
     place-items: center;
+    overflow: hidden;
+    position: relative;
     
 }
 svg {
     width: 205px;
     height: 205px;
+    position: absolute;
 }
 svg .idk {
     stroke: var(--color-base);
+    stroke-width: 15px;
     animation: logoAnimation 5s ease-out forwards;
     animation-delay: 2000ms;
     stroke-dashoffset: 700;
@@ -23,3 +27,8 @@ svg .idk {
         stroke-dashoffset: 0;
     }
 }
+
+
+  
+  
+  

@@ -1,7 +1,7 @@
 
 .cart_container {
-    background-color: white;
-    width: 400px;
+    background-color: #F6F6F6;
+    width: 300px;
     height: 100vh;
     position: absolute;
     right: -1000px;
@@ -9,6 +9,7 @@
     z-index: 0;
     transition: 0.5s;
     visibility: none;
+    box-shadow: -5px 0px 10px rgba(38, 7, 79, 0.462);
     
 }
 .cart_products_section {
@@ -29,6 +30,7 @@
         background-color: transparent;
     }
 
+/* media queris para adaptacion a pantallas medianas y chicas */
     @media (max-width: 768px)  {
         .cart_container {
             width: 100%;
