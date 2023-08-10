@@ -11,13 +11,13 @@ nav {
     align-items: center;
     position: fixed;
     z-index: 1;
-    transition: 1s;
+    transition: 0.5;
 }
     .navBar_logo_and_text {
         display: flex;
         align-items: center;
         gap: 5px;
-        color: var(--primary-color);
+        color: var(--secondary-color);
         font-weight: 900;
         font-size: 20px;
     }
@@ -55,17 +55,25 @@ nav {
                 justify-content: center;
                 align-items: center;
             }
-            .fa-moon{
-                color: var(--color-base);
-                font-size: 15px;
-                display: grid;
-                place-items: center;
+            .nav_bar_toggle_function{
+                justify-content: end;
+                transition: 0.5s;
+            }
+            .cart_container {
+                /* ver cart_section.css */
+                
             }
             .fa-opencart {
                 color: var(--secondary-color);
                 font-size: 25px;
                 cursor: pointer;
                 position: relative;
+            }
+            .fa-moon{
+                color: var(--color-base);
+                font-size: 15px;
+                display: grid;
+                place-items: center;
             }
             .navBar_cart_badge{
                 width: 15px;
@@ -80,4 +88,15 @@ nav {
                 border-radius: 50%;
                 display: grid;
                 place-items: center;
+            }
+
+            .adjust_border_radius {
+                border-bottom-right-radius: 0;
+                transition: 0.5s;
+            }
+
+            @media (max-width: 768px)  {
+                nav {
+                    border-radius: 0px;
+                }
             }

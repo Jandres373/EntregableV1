@@ -13,8 +13,9 @@ svg {
 svg .idk {
     stroke: var(--color-base);
     animation: logoAnimation 5s ease-out forwards;
-    stroke-dashoffset: 500;
-    stroke-dasharray: 500;
+    animation-delay: 2000ms;
+    stroke-dashoffset: 700;
+    stroke-dasharray: 700;
 }
 
 @keyframes logoAnimation {

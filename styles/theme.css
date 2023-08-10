@@ -1,0 +1,41 @@
+/* red mode */
+.red_mode {
+  background-color: var(--primary-color);
+  color: var(--color-base);
+  
+}
+/* Light Mode Styles */
+.light_mode {
+    background-color: var(--color-base);
+    color: var(--secondary-color);
+    transition: 0.5s;
+}
+.light_mode-reverse {
+    background-color: var(--secondary-color);
+    color: var(--color-base);
+    
+}
+.light_mode_text{
+    color: var(--secondary-color);
+
+}
+  /* Dark Mode Styles */
+  .dark_mode {
+      background-color: var(--color-base-dark);
+      color: var(--color-base);
+      transition: 0.5s;
+    }
+    .dark_mode_text{
+        color: var(--color-base);
+        
+    }
+    .darker_mode {
+        background-color: var(--primary-color-dark);
+        color: var(--color-base);
+        transition: 0.5s;
+    }
+    .darker_mode_background {
+        background-color: var(--primary-color-dark);
+    }
+    
+    

@@ -1,5 +1,38 @@
+/* Estilos generales  */
+
 body {
-    min-width: 100vw;
+    max-width: 100vw;
     box-sizing: border-box;
     position: relative;
+    visibility: hidden;
+    visibility: 0;
+    overflow: hidden;
+    
 }
+.loader {
+    position: absolute;
+    background-color: var(--primary-color);
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    opacity: 1;
+    transition: 1s;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+}
+.loader::before {
+    content: 'LOADING...';
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 55px;
+    color: white;
+    margin-bottom: 750px;
+    box-sizing: border-box;
+}
+
+.loaderIcon {
+    width: 500px;
+    height: 500px;
+}
+
+

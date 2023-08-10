@@ -19,7 +19,7 @@
     --secondary-color: #274672;
     --color-base: #f6f6f6;
     --primary-color-dark:#142351;
-    --color-base-dark: #274672;
+    --color-base-dark: #2b356e;
     /* estas dos variables juntas mantiene el mismo padding en cada caja */
         /* (breakpoints sm) */
     --padding-X: 0 30px;
