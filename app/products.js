@@ -1,3 +1,6 @@
+/* Todo este archivo debería ser sustituido por el archivo final a cargo de quien corresponda, esto es solo para desplegar productos y organizar el maquetado, no se espera que este codigo sea 100% funcional u optimo */
+
+
 // Obtenemos los datos del DOM para poderlo manipular.
 let getProducts = document.getElementById("get_products");
 let getMoreProducts = document.getElementById("get_more_products");
@@ -78,8 +81,8 @@ fetch("./components/products.html")
       })
       .catch((error) => {
         // Muestra un mensaje de error si la API falla
-        getProducts.innerHTML = `<h1>El Team 4 lo lamenta. La API nos devuelve un error de tipo:</h1>
-                        <p style="color: red; font-size: 25px;">${error}</p>
-                        <p>Por favor, refresca la página o vuelve en unos minutos.</p>`;
+        getProducts.innerHTML = `<h1>Los productos han sido desactivados voluntariamente. Para desplegarlos:</h1>
+                        <p style="color: red; font-size: 25px;"> remueva la cadena <remove> del final de la url de la api ''<remove>''</p>
+                        <p>${error}</p>`;
       });
   });

@@ -14,9 +14,12 @@
 }
 .cart_products_section {
     height: 80%;
+    width: 100%;
     background-color: transparent;
     display: flex;
-    
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     font-size: 25px;
     overflow-y: scroll;
     
@@ -25,7 +28,7 @@
         right: 0;
     }
     .cart_display_selected_products {
-        width: 100%;
+        width: 200px;
         height: 80%;
         background-color: transparent;
     }

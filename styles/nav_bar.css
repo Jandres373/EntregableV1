@@ -17,21 +17,25 @@ nav {
         display: flex;
         align-items: center;
         gap: 5px;
-        color: var(--secondary-color);
+        color: black;
+        font-family: var(--font-subtitle);
         font-weight: 900;
-        font-size: 20px;
+        font-size: var(--size-subtitle);
     }
     .navBar_logo_and_text img{
         width: 25px;
         
     }
     .navBar_cart_and_toggle{
-        width: 110px;
+        width: 150px;
         display: flex;
-        gap: 10px;
+        justify-content: space-evenly;
+        gap: 50px;
     
     }
         .nav_toggle_mode_box {
+            /* width: 56px;
+            height: 30px; */
             width: 56px;
             height: 30px;
             border-radius: 25px;
@@ -63,7 +67,7 @@ nav {
                 /* ver cart_section.css */
                 
             }
-            .fa-opencart {
+            .fa-cart-shopping {
                 color: var(--secondary-color);
                 font-size: 25px;
                 cursor: pointer;

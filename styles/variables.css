@@ -1,21 +1,25 @@
 /* font-face nos permite importar las fuentes que usaremos en el proyecto */
 @font-face {
-    font-family: 'Helvetica Neue, Medium';
-    src: url(/assets/fonts/PragmaticaMedium.otf);
+    font-family: 'HelveticaNeueMedium';
+    src: url(/assets/fonts/HelveticaNeueMedium.ttf);
 }
 @font-face {
-    font-family: 'Helvetica Neue, Bold';
-    src: url(/assets/fonts/FreeSansBold.otf);
+    font-family: 'HelveticaNeueBold';
+    src: url(/assets/fonts/HelveticaNeueBold.ttf);
+}
+@font-face {
+    font-family: 'HelveticaNeueRegular';
+    src: url(/assets/fonts/HelveticaNeueRegular.ttf);
 }
 
 /* Establecemos variables css para guardar fuentes, colores, tamaños y margenes y tener mayor consistencia y facilidad para realizar cambios en los estilos a lo largo del codigo. */
 :root {
     /* las fuentes usadas a lo largo del website */
-    --font-main-title: 'Helvetica Neue, Medium';
+    --font-main-title: 'HelveticaNeueMedium';
     --size-main-title: 24px;
-    --font-subtitle: 'Helvetica Neue, Bold';
+    --font-subtitle: 'HelveticaNeueBold';
     --size-subtitle: 20px;
-    --font-button-and-body: 'Helvetica Neue, Bold';
+    --font-button-and-body: 'HelveticaNeueRegular';
     --size-button-and-body: 16px;
     /* estas variables son los colores que se usan a lo largo de la pagina en el light mode */
     --primary-color: #eb4a5a;

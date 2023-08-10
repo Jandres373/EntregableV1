@@ -20,19 +20,29 @@ footer {
             font-family: var();
             font-size: 30px;
             color: var(--color-base);
+            font-family: var(--font-main-title);
+            font-size: var(--size-main-title);
         }
         .footer_container h5{
             font-family: var();
             font-size: 15px;
             color: var(--color-base);
+            font-family: var(--font-main-title);
+            font-size: var(--size-main-title);
         }
         .footer_developers_container{
             padding: 40px 0;
             color: var(--color-base);
+            
             text-align: center;
             font-size: 15px;
             
         }
+        .footer_developers_container h6{
+          font-family: var(--font-button-and-body);
+          font-size: var(--size-button-and-body);
+          
+      }
         .hexagon {
             position: absolute;
             top:0;
@@ -44,8 +54,10 @@ footer {
         } 
 
         .footer_developers_container p{
-            font-family: var();
-            font-size: 10px;
+          
+
+          font-family: var(--font-subtitle);
+          font-size: var(--size-button-and-body);
         }
         .footer_developers_container .footer_developers{
             margin: 10px 5px;
