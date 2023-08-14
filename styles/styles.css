@@ -2,7 +2,7 @@
 
 /* scroll para firefox */
 * {
-  scrollbar-width: thin;
+  scrollbar-width: 12 px;
   scrollbar-color: var(--primary-color) transparent;
 }
 
