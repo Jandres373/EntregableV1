@@ -9,7 +9,7 @@
     z-index: 0;
     transition: 0.5s;
     visibility: none;
-    box-shadow: -5px 0px 10px rgba(38, 7, 79, 0.462);
+    box-shadow: -5px 5px 10px rgba(38, 7, 79, 0.462);
     
 }
 .cart_products_section {

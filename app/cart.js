@@ -13,13 +13,11 @@ function openCart(reOpenCar=true) {
         getNavBar.classList.add('adjust_border_radius')  
         getCart.classList.add('show_cart')
         //controla el movimiento del carrito al agregar un producto
-        setTimeout(() => {
             cartActivator.classList.add('fa-bounce')
-        }, 200);
         setTimeout(() => {
             cartActivator.classList.remove('fa-bounce')
         }, 800);
-        //despliega el numero de elementos que hay en el carrito
+        //despliega el numero de elementos que hay en el carrito en el icono junto al carrito para llevar la cuenta de los productos
         getProductNumberDisplay.textContent = cartInsertion.childElementCount
     } else {
         getNavBar.classList.remove('adjust_border_radius')
@@ -28,7 +26,7 @@ function openCart(reOpenCar=true) {
     reOpenCar && (isCartOpen = !isCartOpen)
     !reOpenCar && (isCartOpen = true)
 }
-  //All haber declarado null la variable cartHTML esta condicion se cumple siempre que se inicie el programa o cartHTML no exista, de manara que se evita hacer fetch de manera repetida al archivo cart.html
+  //Al haber declarado null la variable cartHTML esta condicion se cumple siempre que se inicie el programa o cartHTML no exista, de manara que se evita hacer fetch de manera repetida al archivo cart.html
 if (!cartHTML) {
     fetch('/components/cart.html')
     .then(result => data = result.text())

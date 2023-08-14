@@ -31,7 +31,6 @@ nav {
         display: flex;
         justify-content: space-evenly;
         gap: 50px;
-    
     }
         .nav_toggle_mode_box {
             /* width: 56px;
@@ -65,7 +64,6 @@ nav {
             }
             .cart_container {
                 /* ver cart_section.css */
-                
             }
             .fa-cart-shopping {
                 color: var(--secondary-color);
