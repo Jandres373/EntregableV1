@@ -1,38 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carrito de Compras</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Agrega un archivo CSS para el estilo -->
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="container">
-    <h1 class="cart-title">Carrito de Compras</h1>
 
-    <div class="product">
-      <img src="data:image/jpeg;base64,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" alt="Playera negra - logo blanco">
-      <div class="product-details">
-        <p class="product-name">Saco negro con logo gris</p>
-        <p class="product-price">$Precio</p>
-        <div class="quantity">
-          <button class="quantity-btn">-</button>
-          <p class="product-quantity">Cantidad</p>
-          <button class="quantity-btn">+</button>
-          <button class="remove-btn">Eliminar</button>
-        </div>
-      </div>
+<body>
+  <div class=" container">
+    <h1 class=" cart-title theme_content"> <i id="close_cart_btn" class="fa-solid  fa-xmark"></i> </h1>
+
+    <div id="cart_product_insertion">
+
     </div>
 
     <div id="cart-insert-product" class="cart-display-selected-products">
-      <!-- Aquí se mostrarán los productos seleccionados en el carrito -->
+     
     </div>
 
     <div class="cart-total">
-      <p class="total-line">Subtotal: $Precio</p>
-      <p class="total-line">Envío: $Precio</p>
-      <p class="total-line">Total: $Precio</p>
+      <p class="total-line">Subtotal: $</p>
+      <p class="total-line">Envío: $</p>
+      <p class="total-line">Total: $</p>
     </div>
 
     <div class="contact-data">
@@ -68,4 +50,3 @@
     </div>
   </div>
 </body>
-</html>

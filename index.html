@@ -10,12 +10,15 @@
     <link rel="stylesheet" href="/styles/cart.css">
     <link rel="stylesheet" href="/styles/banner_section.css">
     <link rel="stylesheet" href="/styles/products_section.css">
+    <link rel="stylesheet" href="/styles/store_page.css">
     <link rel="stylesheet" href="/styles/footer_section.css">
     <link rel="stylesheet" href="/styles/theme.css">
     <script src="https://kit.fontawesome.com/fb4411fbfb.js" crossorigin="anonymous" defer></script>
-    <script src="/app/main.js" defer></script>
-    <script src="/app/products.js" defer></script>
+    <script src="/app/global.js" ></script>
+    <script src="/app/main.js"  defer></script>
+    <script src="/app/products.js"  defer></script>
     <script src="/app/cart.js" defer></script>
+
     <title>Academlo</title>
 </head>
 <body>
@@ -46,17 +49,19 @@
     </section>
     <main id="get_main" class="theme">
         <div class="main_products_title_container">
-            <h2 class="themeContent">All our products</h2>
+            <h2 class="themeContent">Todos nuestros productos</h2>
             <div class="main_products_select_menu">
-                <select class="themeContent" name="products" title="products" id="products">
-                    <option class="themeContent" value="product">Product</option>
+                <select id="get_select" class="theme " name="products" title="products" id="products">
+                    
                 </select>
             </div>
         </div>
         <div id="get_products" class="main_products_display_container">
         </div>
-        <div class="themeContent main_products_btn_container">
+        <div class="main_products_btn_container">
             <button id="get_more_products" class="themeContent main_products_btn" type="button">More products</button>
+        </div>
+        <div id="get_store">
         </div>
     </main>
     <footer class="darker_theme footer">
@@ -65,7 +70,7 @@
             <h4>Team 4</h4>
             <h5>Academlo gen29</h5>
             <div class="footer_developers_container">
-                <h6>This site was developed by</h6>
+                <h6>Este sitio fué desarrollado por</h6>
                 <div class="footer_developers">
                     <p>Annibal Meza </p>
                     <p>Edwin Mejía </p>
@@ -93,5 +98,11 @@
             </div>
         </div>
     </footer>
+    <div class="modal">
+        <div class="modal modal_center">
+            <h1 class="modal_title">HEY</h1>
+            <h2 class="modal_warning">Este producto ya está en tu carrito</h2>
+        </div>
+    </div>
 </body>
 </html>

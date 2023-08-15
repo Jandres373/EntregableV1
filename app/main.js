@@ -55,7 +55,7 @@ function displayTheme() {
     themeContent.forEach(element => {
       element.classList.add('dark_mode_text');
     });
-    // console.log(window.localStorage.getItem('theme_mode')) - removed for production
+    
   } else {
     glowingItem.classList.remove('activate_dark_mode_additions')
     hexagon.classList.remove('activate_dark_mode_additions')
@@ -70,7 +70,7 @@ function displayTheme() {
     themeContent.forEach(element => {
       element.classList.remove('dark_mode_text');
     });
-    console.log(window.localStorage.getItem('theme_mode'))
+    
   }
 }
 
@@ -78,3 +78,4 @@ getToggle.addEventListener('click', () => {
   activateToggle()
   displayTheme()
 });
+

@@ -1,88 +1,356 @@
-/* Todo este archivo debería ser sustituido por el archivo final a cargo de quien corresponda, esto es solo para desplegar productos y organizar el maquetado, no se espera que este codigo sea 100% funcional u optimo */
-
-
-// Obtenemos los datos del DOM para poderlo manipular.
+// Obtenemos los elementos del DOM para su manipulación.
 let getProducts = document.getElementById("get_products");
-let getMoreProducts = document.getElementById("get_more_products");
+let getSelect = document.getElementById("get_select");
+let getStore = document.querySelector("#get_store");
+let cartActivator = document.querySelector(".fa-cart-shopping");
+let getMore = document.getElementById('get_more_products')
 
 // Guardamos la URL de la API de Academlo en una variable.
 let academloAPI = "https://ecommercebackend.fundamentos-29.repl.co/";
 
-// Cargamos el contenido de 'products.html'. Este es un archivo plano de html (sin etiquetas head, meta, etc) que contiene unicamente la estructura que usaremos para desplegar el componente 'products'  
-fetch("./components/products.html")
-.then((response) => response.text())
-.then((htmlDoc) => {
-  // Almacenamos el contenido HTML del componente 'products.html' en la variable HTML
-  let getAddToCart = document.getElementById("get_add_to_cart");
-    let HTML = htmlDoc;
+// creamos una variable para controlar el estado del carrito
+let isCarOpen = false
+let productsArray = []
+let arrProductsByCategory = []
+let arrayObjectsInCar = []
 
-    // Realizamos una petición a la API de Academlo para obtener los datos de los productos
-    fetch(academloAPI)
-      .then((response) => response.json())
-      .then((data) => {
-        // Obtenemos el elemento donde se insertarán los productos en el carrito (esto no se puede hacer arriba porque si intentamos acceder a cartInsertion fuera del fetch no lo podría cargar)
-        let cartInsertion = document.getElementById("cart_insert_product");
-        // declaramos la variable donde almacenaremos el producto seleccionado por el usuario
-        let selectedProduct;
+cartActivator.addEventListener('click', () => {
+  toggleCart()
+})
+getMore.addEventListener('click', () => {
+  expandProducts()
+})
 
-        // Creamos un arreglo de objetos con los datos de los productos y el HTML del componente.
-        // En sí lo que se hace aquí es que por cada objeto obtenido en el arreglo de la API (data.length) vamos a llenar una posicion del arreglo con el HTML que llamamos del archivo products.html.
-        // Es decir, habrá 18 veces la misma estructura de html, entonces si se modifica una vez el archivo products.html se modifica en cada uno de los productos que se va a desplegar en la pagina, esto facilita que sean todos iguales y no necesitar maquetar más de una vez lo mismo.
-        const products = Array(data.length).fill(HTML);
-        const arrangedData = products.map((product, i) => {
-          product = data[i];
-          product["html"] = HTML;
-          return product;
-        });
+function expandProducts() {
+  getProducts.classList.toggle('expand_products')
+}
+function addProductToCart() {
+  let getCart = document.getElementById("get_cart");
+  addToCart = document.getElementById("add_to_cart");
+  let selectedProductCart;
+  addToCart.addEventListener("click", () => {
+    selectedProductCart = localStorage.getItem("selectedProduct");
+    selectedProductCart = JSON.parse(selectedProductCart);
+    
 
-        // Insertamos los productos en el elemento 'getProducts' que obtuvimos del ID get_products en el index.html
-        getProducts.innerHTML = arrangedData
-          .map((e, i) => {
-            // Reemplaza las variables en el HTML del producto y devuelve esto como valores de arrangeData, el producto completo (incluyendo el HTML que agregamos se sigue guardando en la constante products)
-            e.html = HTML.replace("{dsp_product_id}", data[i].id)
-              .replace("{dsp_product_image}", data[i].image)
-              .replace("{dsp_product_name}", data[i].name)
-              .replace("{dsp_product_price}", data[i].price);
-            return e.html;
+    fetch("./components/cart.html")
+      .then((cart) => cart.text())
+      .then((cartHTML) => {
+        let getProductNumberDisplay = document.querySelector(
+          "#get_product_number_display"
+        );
+        let productHTML = `<div class="product">
+        <img src="{dsp_product_image}" alt="Playera negra - logo blanco">
+                            <div class="product-details">
+                            <p class="product-name">{dsp_product_name}</p>
+                            <p class="product-price">{dsp_product_price}</p>
+                              <div class="quantity">
+                              <i class="fa-solid fa-angle-down"></i>
+                                <p class="product-quantity">0</p>
+                                <i class="fa-solid fa-angle-up"></i>
+                                <button class="remove-btn"><i class="fa-regular fa-trash-can"></i></button>
+                                </div>
+                                </div>
+                                </div>`;
+        getCart.innerHTML = cartHTML;
+        let cartInsertion = document.getElementById("cart_product_insertion");
+        let closeCartBtn = document.getElementById("close_cart_btn");
+
+        productHTML = productHTML
+        .replace("{dsp_product_image}", selectedProductCart.image)
+        .replace("{dsp_product_name}", selectedProductCart.name)
+        .replace("{dsp_product_price}", `$${selectedProductCart.price}.00`)
+        .replace("{dsp_product_quantity}", selectedProductCart.quantity);
+        
+        if (productsArray.includes(productHTML)) {
+           popModal('risk','Este producto ya está en tu carrito') 
+        } else {
+          productsArray.push(productHTML)
+        }
+        getProductNumberDisplay.textContent = productsArray.length 
+          
+        if (cartInsertion) {
+          cartInsertion.innerHTML += productsArray.join('')
+
+          let deleteProduct = document.querySelectorAll('.fa-trash-can')
+          deleteProduct.forEach(element => {
+            element.addEventListener('click', (e) => {
+              let product = e.target.parentElement.parentElement.parentElement.firstElementChild
+
+              /* productsArray.pop() */
+              /* productsArray = productsArray.filter(e=>e.name!==product.innerHTML) */
+
+              console.log(productsArray[0])
+              console.log(product.innerHTML)
+              
+              cartInsertion.innerHTML = productsArray.join('')
+              
+              
+            });
+          
           })
-          .join("");
-
-        // Agrega un evento 'click' para cada producto, en este caso el click será valido en la imagen o cualquier parte del cuerpo del producto no solo en el botón. 
-        getProducts.addEventListener("click", (e) => {
-          let clickedItem = e.target.parentElement ;
-          console.log(clickedItem)
-          // Encuentra el producto seleccionado
-          arrangedData.map((e, i) => {
-            if (Number(e.id) === Number(clickedItem.id)) {
-              // Lo igualamos a la variable previamente definida 'selectProduct'
-              selectedProduct = e;
-            }
-          });
-
-          // Convertimos el producto seleccionado a formato JSON y se almacena en el localStorage para poderlos recordar independientemente de que el usuario cierre la pagina.
-          selectedProduct = JSON.stringify(selectedProduct);
-          localStorage.setItem("selectedProduct", selectedProduct);
-
-          // Agrega el producto al carrito 
-          let productAdded = JSON.parse(
-            localStorage.getItem("selectedProduct")
-            
-          );
-          //aquí se inyecta el HTML tal como vino, sin hacer ninguna modificacion. Si se quisiera cambiar por ejemplo las clases o agregar o quitar elementos se puede usar el metodo .map() para editar cada producto (tener en cuenta que esto los afectaría a todos a menos que se especifiique usando el index del metodo .map())
-          cartInsertion.innerHTML += productAdded.html;
-          openCart(false)
+        closeCartBtn.addEventListener("click", () => {
+          closeCart()
         });
+        arrayObjectsInCar.push(selectedProductCart)
 
-        // Agregamos un evento 'click' para el botón 'getMoreProducts'
-        getMoreProducts.addEventListener("click", () => {
-          // Cambia el tamaño de la sección principal añadiendo más espacio para que se desplieguen los productos
-          getMain.classList.toggle("change_size");
-        });
-      })
-      .catch((error) => {
-        // Muestra un mensaje de error si la API falla
-        getProducts.innerHTML = `<h1>Los productos han sido desactivados voluntariamente. Para desplegarlos:</h1>
-                        <p style="color: red; font-size: 25px;"> remueva la cadena <remove> del final de la url de la api ''<remove>''</p>
-                        <p>${error}</p>`;
-      });
+        /* productsArray
+        arrayObjectsInCar */
+
+
+        /// logica del carrito
+
+
+      }});
+
+    openCart();
   });
+}
+function popModal(type,warning) {
+  let modal = document.querySelector('.modal')
+  let cartActivator = document.querySelector(".fa-cart-shopping");
+  
+  
+    modal.classList.add('popModal')
+    modal.setAttribute('style','background-color: var(--color-base);')
+  
+    cartActivator.classList.add("fa-shake");
+    setTimeout(() => {
+      cartActivator.classList.remove("fa-shake");
+    }, 800);
+    setTimeout(() => {
+      modal.classList.remove('popModal')
+    }, 3000);
+}
+function openCart() {
+  let getCart = document.getElementById("get_cart");
+  let cartActivator = document.querySelector(".fa-cart-shopping");
+  let getProductNumberDisplay = document.querySelector(
+    "#get_product_number_display"
+  );
+
+  getNavBar.classList.add("adjust_border_radius");
+  getCart.classList.add("show_cart");
+  //controla el movimiento del carrito al agregar un producto
+  cartActivator.classList.add("fa-bounce");
+  setTimeout(() => {
+    cartActivator.classList.remove("fa-bounce");
+  }, 800);
+  isCarOpen = true
+}
+function closeCart() {
+  let getCart = document.getElementById("get_cart");
+  let cartActivator = document.querySelector(".fa-cart-shopping");
+
+  getNavBar.classList.remove("adjust_border_radius");
+  getCart.classList.remove("show_cart");
+  
+  //controla el movimiento del carrito al agregar un producto
+  cartActivator.classList.add("fa-beat-fade");
+  setTimeout(() => {
+    cartActivator.classList.remove("fa-beat-fade");
+  }, 800);
+  isCarOpen = false
+}
+function toggleCart() {
+  let cartActivator = document.querySelector(".fa-cart-shopping");
+  let getCart = document.getElementById("get_cart");
+  getCart.classList.toggle("show_cart");
+}
+//desplegamos las funciones que necesitaremos
+function openStore() {
+  getStore.firstElementChild.classList.add("store_visible");
+}
+// Realizamos una petición a la API de Academlo para obtener los datos de los productos
+async function fetchProducts() {
+  try {
+    const response = await fetch(academloAPI);
+    const data = await response.json();
+
+    // Generamos las opciones del menú de selección con las categorías únicas de la API
+    let categories = data.map((e) => e.category);
+    categories.unshift("todos");
+    categories = [...new Set(categories)];
+    let menuOptions = categories
+      .map(
+        (category, index) =>
+          `<option id="${index}" class="themeContent" value="${category}">${category}</option>`
+      )
+      .join("");
+
+    // Actualizamos el HTML del menú de selección
+    getSelect.innerHTML = menuOptions;
+
+    // Función para renderizar la lista de productos en el DOM
+    function renderProducts(productArray) {
+      return productArray
+        .map(
+          (product) => `
+          <div class="products_display theme" id="${product.id}">
+            <img class="product_img" title="product" src="${product.image}">
+            <p class="product_name">${product.name}</p>
+            <div class="product_varintas"></div>
+            <p class="price">$${product.price}.00</p>
+            <button class="themeContent main_product_select_btn product_view" type="button">Ver detalles</button>
+          </div>
+        `
+        )
+        .join("");
+    }
+
+    // Renderizamos todos los productos iniciales en el DOM
+    getProducts.innerHTML = renderProducts(data);
+
+    // Manejamos el cambio en la selección de categorías
+    getSelect.addEventListener("change", (event) => {
+      const selectedCategory = event.target.value;
+      if (selectedCategory === "todos") {
+        getProducts.innerHTML = renderProducts(data);
+      } else {
+        const filteredProducts = data.filter(
+          (product) => product.category === selectedCategory
+        );
+        arrProductsByCategory = filteredProducts
+        getProducts.innerHTML = renderProducts(filteredProducts);
+      }
+    });
+
+    // Agregamos el evento click para ver detalles de un producto
+    getProducts.addEventListener("click", (event) => {
+      if (event.target.classList.contains("product_view")) {
+        const selectedProductElement = event.target.parentElement;
+        const selectedProductId = parseInt(selectedProductElement.id);
+        const selectedProduct = data.find(
+          (product) => product.id === selectedProductId
+        );
+
+        // Aquí puedes realizar acciones con el producto seleccionado, como mostrar detalles en otra parte del DOM o guardar en localStorage.
+        // Por ahora, solo imprimiré el producto en la consola como ejemplo.
+
+        localStorage.setItem(
+          "selectedProduct",
+          JSON.stringify(selectedProduct)
+        );
+
+        if (selectedProduct) {
+          let modifiedHTML = storeHTML
+            .replace("{dsp_product_name}", selectedProduct.name)
+            .replace("{dsp_product_price}", `$${selectedProduct.price}.00`)
+            .replace("{dsp_product_category}", selectedProduct.category)
+            .replace("{dsp_product_image}", selectedProduct.image)
+            .replace("{dsp_product_description}",selectedProduct.description)
+            .replace("{dsp_product_quantity}", selectedProduct.quantity)
+            .replace("{dsp_product_image2}", selectedProduct.image);
+          getStore.innerHTML = modifiedHTML;
+          openStore();
+          
+        } else {
+        }
+
+        let closeBtn = document.querySelectorAll(".close_btn");
+        closeBtn.forEach((element) => {
+          element.addEventListener("click", () => {
+            closeStore();
+          });
+        });
+
+        addProductToCart();
+
+        return selectedProduct;
+      }
+    });
+
+    //store
+
+    function closeStore() {
+      getStore.firstElementChild.classList.remove("store_visible");
+    }
+
+    let relatedProductsHTML = `<div class="store_product_container" id="related_product_01">
+                                    <img src="{dsp_related_image}" alt="" class="store_product_img">
+                                    <p class="store_product_text_related">{dsp_related_name}</p>
+                                </div>`
+
+    let storeHtmlTemplate = `<div class="appendedHTML_container theme">
+    <section class="products_section">
+      <section class="first">
+          <div class="store_heading_text">
+              <div class="store_heading_container">
+                  <i class="fa-solid close_btn fa-arrow-left"></i>
+                  <h2 class="store_title">Academlo - Tienda oficial </h2>
+              </div>
+              <i class="fa-solid close_btn fa-xmark"></i>
+          </div>
+          <div class="product_section_container">
+              <div class="store_product_insights">
+                  <p class="store_product_text">{dsp_product_name}</p>
+                  <p class="store_product_text">{dsp_product_price}</p>
+                  <p class="store_product_description"> {dsp_product_category} oficiales de academlo</p>
+                  <p class="store_product_text">Colores</p>
+                  <div class="store_product_variants">
+                      <img id="img_insertion_1" class="store_img_variant_container" src="{dsp_product_image2}" alt="">
+                      
+                  </div>
+                  <div class="store_sizes_info">
+                      <p class="store_product_text">Descripcion</p>
+                      <p class="store_product_guide_text"><img src="/public/icons8-info.svg" alt="" width="20px">Sizing Guide</p>
+                  </div>
+                  <div class="store_product_description">
+                      <p>{dsp_product_description}</p>
+                  </div>
+                  <div class="store_button_container">
+                  <button id="add_to_cart" class="store_button" >Añadir</button>
+                  </div>
+                    <div>
+                      <p class='store_product_stock'>En stock: <span>{dsp_product_quantity}</span> </p>
+                    </div>
+              </div>
+              <div class="product_section_display">
+                  <div class="theme colored_frame">
+      
+                  </div>
+                  <img class="store_img_product_maximized" src="{dsp_product_image}" width="300px" height="350px" alt="">
+              </div>
+          </div>
+          <div class="store_related_products">
+              <h2>Productos relacionados</h2>
+              <div class="store_products_display_container" id="productSection">
+              {dsp_related_products}
+                  
+              </div>
+          </div>
+      </section>
+      <section class="store_suscription_container">
+          <h2 class="suscribe_section_heading">Mantente en contacto</h2>
+          <p class="suscribe_section_text">Suscribite para recibir notificaciones y promociones de nuestros productos</p>
+          <div class="store_email_suscription_container">
+              <input class="suscribe_input" type="email" placeholder="Escribe tu email"><button class="susbribe_button">SUSCRIBETE</button>
+          </div>
+      </section>
+    </section>
+    
+    </div>`
+
+  
+   function genareteRelatedProducts() {
+    function generateRandomNum() {
+      let randomProd = Math.floor(Math.random()*17)
+      return randomProd
+    }
+    
+      for (let i = 0; i < 5; i++) {
+        arrProductsByCategory.push(data[generateRandomNum()])
+      }
+    
+    return arrProductsByCategory
+   }
+   let relatedProducts = genareteRelatedProducts()
+   
+
+    let storeHTML = storeHtmlTemplate.replace("{dsp_related_products}", Array(5).fill(relatedProductsHTML).map((e,i)=>e.replace("{dsp_related_image}",relatedProducts[i].image).replace("{dsp_related_name}",relatedProducts[i].name)).join(''))
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+fetchProducts();

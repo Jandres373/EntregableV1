@@ -2,21 +2,21 @@
 
 /* scroll para firefox */
 * {
-  scrollbar-width: 12 px;
-  scrollbar-color: var(--primary-color) transparent;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-base) transparent;
 }
 
 /* Scroll para otros navegadores */
 *::-webkit-scrollbar {
-  width: 12px;
+  width: 5px;
 }
 *::-webkit-scrollbar-track {
-  background: rgb(255, 0, 93);
+  background: rgb(196, 175, 183);
 }
 *::-webkit-scrollbar-thumb {
-  background-color: blue;
-  border-radius: 20px;
-  border: 3px solid rgb(255, 0, 98);
+  background-color: var(--color-base);
+  border-radius: 10px;
+  border: 3px solid transparent;
 }
 
 
@@ -27,6 +27,8 @@ body {
     visibility: hidden;
     visibility: 0;
     overflow: hidden;
+    z-index: -1;
+    
     
 }
 
@@ -60,3 +62,58 @@ body {
 
 
 
+/* modal */
+
+.modal {
+  display: grid;
+  place-items: center;
+  width: 340px;
+  padding: 10px;  
+  height: 50px;
+  position: fixed;
+  top: 50px;
+  right: 0px;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 500;
+  transition: 0.5s;
+  border-radius: 20px;
+}
+.modal_center {
+  visibility: hidden;
+  opacity: 1;
+  display: grid;
+  place-items: center;
+  height: 50px;
+  border-radius: 20px;
+  color: black;
+  z-index: 501;
+}
+.modal_title {
+  visibility: visible;
+  font-size: 25px;
+  color: black;
+}
+.modal_warning {
+  visibility: visible;
+  font-size: 20px;
+  color: black;
+}
+
+/* pop Modal */
+
+.popModal {
+
+  visibility: visible;
+  opacity: 1;
+  transition: 0.5s
+}
+.modal_red {
+  background-color: red;
+}
+.moda_yellow {
+  background-color: yellow;
+}
+.modal_green{
+  background-color: green;
+}

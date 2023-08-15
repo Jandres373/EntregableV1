@@ -26,9 +26,11 @@
       background-color: var(--color-base-dark);
       color: var(--color-base);
       transition: 0.5s;
+      
     }
     .dark_mode_text{
         color: var(--color-base);
+        background-color: var(--secondary-color-dark);
         
     }
     .darker_mode {

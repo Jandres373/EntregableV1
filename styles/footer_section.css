@@ -5,6 +5,7 @@ footer {
     /* border-top-left-radius: 25px;
     border-top-right-radius: 25px; */
     overflow: hidden;
+    z-index: -1;
     
 }
     .footer_container{
