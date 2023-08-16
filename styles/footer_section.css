@@ -8,6 +8,19 @@ footer {
     z-index: -1;
     
 }
+     .darker_theme .social {
+      margin: 20px;
+      display: inline-block;
+    }
+   /* .darker_theme .social ul {
+      background-color: #fff;
+      height: 50px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;  
+    }*/
     .footer_container{
         padding: 25px 0;
         display: flex;

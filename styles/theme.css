@@ -23,7 +23,7 @@
 }
   /* Dark Mode Styles */
   .dark_mode {
-      background-color: var(--color-base-dark);
+      background-color: #302553;
       color: var(--color-base);
       transition: 0.5s;
       
