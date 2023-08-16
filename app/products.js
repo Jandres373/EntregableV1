@@ -12,10 +12,11 @@ let academloAPI = "https://ecommercebackend.fundamentos-29.repl.co/";
 let isCarOpen = false;
 let productsArray = [];
 let arrProductsByCategory = [];
-let objectsInCart = { productAPIdata: [], productHTML: [] };
+let objectsInCart = { productAPIdata: [], productHTML: [] ,  amount: []  };
 let selectedProductCart;
 let productHTML;
 let getProductNumberDisplay;
+
 
 cartActivator.addEventListener("click", () => {
   toggleCart();
@@ -49,7 +50,6 @@ function renderProduct() {
   <div class=" container">
     <h1 class=" cart-title theme_content"> <i id="close_cart_btn" class="fa-solid  fa-xmark"></i> </h1>
     <div id="cart_product_insertion">
-    /* aquí van los productos */
     </div>
     <div id="cart-insert-product" class="cart-display-selected-products">
     </div>
@@ -94,8 +94,9 @@ function renderProduct() {
     .replace("{dsp_product_image}", selectedProductCart.image)
     .replace("{dsp_product_name}", selectedProductCart.name)
     .replace("{dsp_product_price}", `$${selectedProductCart.price}.00`)
+    .replace("{dsp}", objectsInCart.amount.length === 0 ? 1 : 1)
     .replace("{dsp_product_quantity}", selectedProductCart.quantity);
-  
+    
 }
 function handleCartInsertion() {
   let cartInsertion = document.getElementById("cart_product_insertion");
@@ -111,20 +112,22 @@ function addProductToCart() {
     selectedProductCart = localStorage.getItem("selectedProduct");
     selectedProductCart = JSON.parse(selectedProductCart);
     openCart();
-
     renderProduct();
     let closeCartBtn = document.getElementById("close_cart_btn");
     closeCartBtn.addEventListener("click", () => {
       closeCart();
     });
-
+    
     if (!objectsInCart.productHTML.includes(productHTML)) {
     objectsInCart.productAPIdata.push(selectedProductCart);
     objectsInCart.productHTML.push(productHTML);
+    objectsInCart.amount.push(1)
+    
    ;
     } else {
       popModal("var(--secondary-color)", "Este producto ya está en tu carrito");
     }
+    renderProduct();
 
     suscribeToEmail()
     deleteProduct();
@@ -170,7 +173,7 @@ function deleteProduct() {
   });
 }
 function increaseProductCount() {
-  
+  computateValues()
   let cartInsertion = document.getElementById("cart_product_insertion");
   cartInsertion.addEventListener("click", (e) => {
     if (e.target.classList.contains("fa-angle-up")) {
@@ -179,10 +182,14 @@ function increaseProductCount() {
       let productIndex = Array.from(cartInsertion.children).indexOf(productContainer);
       let quantitySelector = quantityForIncrease.querySelector(".product-quantity");
       let quantityText = parseInt(quantitySelector.textContent);
-  
+      
+      let updatedProductHTML = objectsInCart.productHTML[productIndex].replace(/>[0-9]</g, `>${quantityText + 1}<`);
+      objectsInCart.productHTML[productIndex] = updatedProductHTML;
 
       if (quantityText < Number(objectsInCart.productAPIdata[productIndex].quantity)) {
         quantitySelector.textContent = quantityText + 1;
+        objectsInCart.amount[productIndex] = quantityText + 1;
+        console.log(objectsInCart.amount)
       } else {
         popModal("var(--primary-color)", "Lo sentimos, no hay más de este producto en stock")
       }
