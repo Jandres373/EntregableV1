@@ -1,6 +1,6 @@
 footer {
     width: 100%;
-    height: 350px;
+    height: 300px;
     background-color: var(--primary-color);
     /* border-top-left-radius: 25px;
     border-top-right-radius: 25px; */
@@ -10,15 +10,10 @@ footer {
     flex-direction: column-reverse;
     
 }
-
-
-
      footer .social {
       margin: 20px;
-      /* display: inline-block; */
     }
      footer .social ul {
-      /* background-color: #fff; */
       height: 70px;
       width: 100%;
       display: flex;
@@ -29,8 +24,7 @@ footer {
       
     }
     .tamaño  {
-          font-size: 30px;
-          
+          font-size: 30px;    
     }
     .social a {
         color: white;
@@ -40,11 +34,8 @@ footer {
       scale:1.2;
       transition: all 300ms ease;
     }
-   
-
-
     .footer_container{
-        padding: 25px 0;
+        padding: 25px 0 0 0;
         display: flex;
         justify-content: center;
         align-items: center;
