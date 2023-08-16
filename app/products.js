@@ -38,7 +38,7 @@ function renderProduct() {
                             <p class="product-price">{dsp_product_price}</p>
                               <div class="quantity">
                               <i class="fa-solid fa-angle-down"></i>
-                                <p class="product-quantity">0</p>
+                                <p class="product-quantity">1</p>
                                 <i class="fa-solid fa-angle-up"></i>
                                 <button class="remove-btn"><i class="fa-regular fa-trash-can"></i></button>
                                 </div>
@@ -95,6 +95,7 @@ function renderProduct() {
     .replace("{dsp_product_name}", selectedProductCart.name)
     .replace("{dsp_product_price}", `$${selectedProductCart.price}.00`)
     .replace("{dsp_product_quantity}", selectedProductCart.quantity);
+  
 }
 function handleCartInsertion() {
   let cartInsertion = document.getElementById("cart_product_insertion");
@@ -120,20 +121,19 @@ function addProductToCart() {
     if (!objectsInCart.productHTML.includes(productHTML)) {
     objectsInCart.productAPIdata.push(selectedProductCart);
     objectsInCart.productHTML.push(productHTML);
-    console.log(objectsInCart.productAPIdata);
-    console.log(objectsInCart.productHTML);
+   ;
     } else {
       popModal("var(--secondary-color)", "Este producto ya está en tu carrito");
     }
 
+    suscribeToEmail()
     deleteProduct();
     handleCartInsertion();
     increaseProductCount()
     decreaseProductCount()
-    computateValues()
-    suscribeToEmail()
     confirmPurchase()
     updateProductsCount();
+    
 
     /* if (objectsInCart.productHTML.includes(productHTML)) {
       popModal("risk", "Este producto ya está en tu carrito");
@@ -167,10 +167,10 @@ function deleteProduct() {
         }
       }
     }
-    computateValues()
   });
 }
 function increaseProductCount() {
+  
   let cartInsertion = document.getElementById("cart_product_insertion");
   cartInsertion.addEventListener("click", (e) => {
     if (e.target.classList.contains("fa-angle-up")) {
@@ -179,8 +179,7 @@ function increaseProductCount() {
       let productIndex = Array.from(cartInsertion.children).indexOf(productContainer);
       let quantitySelector = quantityForIncrease.querySelector(".product-quantity");
       let quantityText = parseInt(quantitySelector.textContent);
-      console.log(productIndex)
-      console.log(Number(objectsInCart.productAPIdata[productIndex].quantity))
+  
 
       if (quantityText < Number(objectsInCart.productAPIdata[productIndex].quantity)) {
         quantitySelector.textContent = quantityText + 1;
@@ -188,6 +187,7 @@ function increaseProductCount() {
         popModal("var(--primary-color)", "Lo sentimos, no hay más de este producto en stock")
       }
     }
+    computateValues()
   });
 }
 function decreaseProductCount() {
@@ -204,6 +204,7 @@ function decreaseProductCount() {
         popModal("var(--primary-color)","debes seleccionar al menos 1 producto")
       }
     }
+    computateValues()
   });
   
   /* let productContainer = e.target.closest(".product");
@@ -216,30 +217,33 @@ function updateProductsCount() {
   getProductNumberDisplay.textContent = objectsInCart.productHTML.length;
 }
 function computateValues() {
+  // Obtenemos los elementos del DOM
   let cartInsertion = document.getElementById("cart_product_insertion");
   let subTotal = document.getElementById('sub_total');
   let shipping = document.getElementById('shipping');
   let total = document.getElementById('total');
-  let insertedChildren = Array.from(cartInsertion.children)
-
-  let quantitiesAdded = document.querySelectorAll('.product-quantity')
-  let numberOfQuantities = []
-  quantitiesAdded.forEach(element => {
-    numberOfQuantities.push(Number(element.firstChild.textContent))
-  });
-  console.log(numberOfQuantities)
-  /* console.log(objectsInCart.productHTML.some(e=> insertedChildren.includes(e) )) */
-  /* console.log(objectsInCart.productHTML.filter((e,i)=> e===insertedChildren[0].outerHTML && i))
-  console.log(insertedChildren[0].outerHTML)
-  console.log(objectsInCart.productHTML[0]) */
-  let subTotalValue = objectsInCart.productAPIdata.reduce((a,b)=> a + Number(b.price),0)
-  let shippingVaue = subTotalValue>0 ? 7 : 0
-  subTotal.textContent = `Sub total: $${insertedChildren.length>0 && subTotalValue}.00`
-  shipping.textContent = `Envío: $${shippingVaue}.00`
-  total.textContent = `Total: $${subTotalValue + shippingVaue}.00`
-
+  let insertedChildren = Array.from(cartInsertion.children);
+  let quantitiesAdded = document.querySelectorAll('.product-quantity');
   
+  // Creamos arreglos con las cantidades y precios de los productos
+  let arrQuantities = Array.from(quantitiesAdded).map(node => Number(node.innerText));
+  let arrPrices = objectsInCart.productAPIdata.map(product => product.price);
+  
+  // Calculamos el valor total para cada producto multiplicando la cantidad seleccionada por el precio
+  let subTotalValue = 0;
+  for (let i = 0; i < arrQuantities.length; i++) {
+    subTotalValue += arrQuantities[i] * arrPrices[i];
+  }
+  
+  // Calculamos el valor del envío
+  let shippingValue = subTotalValue > 0 ? 7 : 0;
+
+  // Actualizamos los elementos del DOM con los valores calculados
+  subTotal.textContent = `Sub total: $${subTotalValue.toFixed(2)}`;
+  shipping.textContent = `Envío: $${shippingValue.toFixed(2)}`;
+  total.textContent = `Total: $${(subTotalValue + shippingValue).toFixed(2)}`;
 }
+
 function popModal(type, warning) {
   let modal = document.querySelector(".modal");
   let cartActivator = document.querySelector(".fa-cart-shopping");
@@ -263,7 +267,7 @@ function openCart() {
   let getProductNumberDisplay = document.querySelector(
     "#get_product_number_display"
   );
-
+  suscribeToEmail()
   getNavBar.classList.add("adjust_border_radius");
   getCart.classList.add("show_cart");
   //controla el movimiento del carrito al agregar un producto

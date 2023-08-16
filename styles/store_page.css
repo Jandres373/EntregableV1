@@ -10,6 +10,7 @@
     box-sizing: border-box;
     color: black;
     padding: 0 200px;
+    scroll-snap-align: start;
 }
 .store_visible {
     right: 0px !important;

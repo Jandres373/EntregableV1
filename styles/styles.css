@@ -28,6 +28,8 @@ body {
     visibility: 0;
     overflow: hidden;
     z-index: -1;
+    scroll-snap-type: mandatory;
+
 }
 
 /* Loader que aparece al inicio de la pagina, esto no es necesario pero al guardar el tema en el localStorage presenta algunos problemas que de momento un simple loader puede camuflar */
