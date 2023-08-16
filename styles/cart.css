@@ -13,7 +13,7 @@
   }
 
   .fa-xmark {
-    cursor: pointer;
+    visibility: hidden;
   }
   
   /* Carrito de compras */
