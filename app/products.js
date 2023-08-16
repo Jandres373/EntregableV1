@@ -3,43 +3,35 @@ let getProducts = document.getElementById("get_products");
 let getSelect = document.getElementById("get_select");
 let getStore = document.querySelector("#get_store");
 let cartActivator = document.querySelector(".fa-cart-shopping");
-let getMore = document.getElementById('get_more_products')
+let getMore = document.getElementById("get_more_products");
 
 // Guardamos la URL de la API de Academlo en una variable.
 let academloAPI = "https://ecommercebackend.fundamentos-29.repl.co/";
 
-// creamos una variable para controlar el estado del carrito
-let isCarOpen = false
-let productsArray = []
-let arrProductsByCategory = []
-let arrayObjectsInCar = []
+// creamos variables para controlar el estado del carrito
+let isCarOpen = false;
+let productsArray = [];
+let arrProductsByCategory = [];
+let objectsInCart = { productAPIdata: [], productHTML: [] };
+let selectedProductCart;
+let productHTML;
+let getProductNumberDisplay;
 
-cartActivator.addEventListener('click', () => {
-  toggleCart()
-})
-getMore.addEventListener('click', () => {
-  expandProducts()
-})
-
+cartActivator.addEventListener("click", () => {
+  toggleCart();
+});
+getMore.addEventListener("click", () => {
+  expandProducts();
+});
 function expandProducts() {
-  getProducts.classList.toggle('expand_products')
+  getProducts.classList.toggle("expand_products");
 }
-function addProductToCart() {
+function renderProduct() {
   let getCart = document.getElementById("get_cart");
-  addToCart = document.getElementById("add_to_cart");
-  let selectedProductCart;
-  addToCart.addEventListener("click", () => {
-    selectedProductCart = localStorage.getItem("selectedProduct");
-    selectedProductCart = JSON.parse(selectedProductCart);
-    
-
-    fetch("./components/cart.html")
-      .then((cart) => cart.text())
-      .then((cartHTML) => {
-        let getProductNumberDisplay = document.querySelector(
-          "#get_product_number_display"
-        );
-        let productHTML = `<div class="product">
+  getProductNumberDisplay = document.querySelector(
+    "#get_product_number_display"
+  );
+  productHTML = `<div class="product">
         <img src="{dsp_product_image}" alt="Playera negra - logo blanco">
                             <div class="product-details">
                             <p class="product-name">{dsp_product_name}</p>
@@ -52,75 +44,218 @@ function addProductToCart() {
                                 </div>
                                 </div>
                                 </div>`;
-        getCart.innerHTML = cartHTML;
-        let cartInsertion = document.getElementById("cart_product_insertion");
-        let closeCartBtn = document.getElementById("close_cart_btn");
-
-        productHTML = productHTML
-        .replace("{dsp_product_image}", selectedProductCart.image)
-        .replace("{dsp_product_name}", selectedProductCart.name)
-        .replace("{dsp_product_price}", `$${selectedProductCart.price}.00`)
-        .replace("{dsp_product_quantity}", selectedProductCart.quantity);
-        
-        if (productsArray.includes(productHTML)) {
-           popModal('risk','Este producto ya está en tu carrito') 
-        } else {
-          productsArray.push(productHTML)
-        }
-        getProductNumberDisplay.textContent = productsArray.length 
-          
-        if (cartInsertion) {
-          cartInsertion.innerHTML += productsArray.join('')
-
-          let deleteProduct = document.querySelectorAll('.fa-trash-can')
-          deleteProduct.forEach(element => {
-            element.addEventListener('click', (e) => {
-              let product = e.target.parentElement.parentElement.parentElement.firstElementChild
-
-              /* productsArray.pop() */
-              /* productsArray = productsArray.filter(e=>e.name!==product.innerHTML) */
-
-              console.log(productsArray[0])
-              console.log(product.innerHTML)
-              
-              cartInsertion.innerHTML = productsArray.join('')
-              
-              
-            });
-          
-          })
-        closeCartBtn.addEventListener("click", () => {
-          closeCart()
-        });
-        arrayObjectsInCar.push(selectedProductCart)
-
-        /* productsArray
-        arrayObjectsInCar */
-
-
-        /// logica del carrito
-
-
-      }});
-
+  getCart.innerHTML = `
+        <body>
+  <div class=" container">
+    <h1 class=" cart-title theme_content"> <i id="close_cart_btn" class="fa-solid  fa-xmark"></i> </h1>
+    <div id="cart_product_insertion">
+    /* aquí van los productos */
+    </div>
+    <div id="cart-insert-product" class="cart-display-selected-products">
+    </div>
+    <div class="cart-total">
+      <p id="sub_total" class="total-line">Subtotal: $</p>
+      <p id="shipping" class="total-line">Envío: $</p>
+      <p id="total" class="total-line">Total: $</p>
+    </div>
+    <div class="contact-data">
+      <h2>Datos de Contacto</h2>
+      <label for="user">Nombre(s)*</label><br>
+      <input type="text" id="user"><br>
+      <label for="lastName">Apellido(s)*</label><br>
+      <input type="text" id="lastName"><br>
+      <label for="email">Correo Electrónico*</label><br>
+      <input type="email" id="email"><br>
+    </div>
+    <div class="shipping-address">
+      <h2>Dirección de Envío</h2>
+      <label for="direction">Dirección de Envío*</label><br>
+      <input type="text" id="direction"><br>
+      <label for="city">Ciudad de Residencia*</label><br>
+      <input type="text" id="city"><br>
+      <label for="code">Código Postal*</label><br>
+      <input type="number" id="code"><br>
+      <label for="country">País*</label><br>
+      <select id="country">
+        <option value="Colombia">Colombia</option>
+        <option value="Mexico">México</option>
+        <option value="Peru">Perú</option>
+        <option value="otherCountry">Otro país</option>
+      </select>
+    </div>
+    <div class="buttons">
+      <button class="confirm-btn" type="button">Confirmar Compra</button>
+      <button class="continue-shopping-btn" type="button">Continuar Comprando</button>
+    </div>
+  </div>
+</body>
+`;
+  productHTML = productHTML
+    .replace("{dsp_product_image}", selectedProductCart.image)
+    .replace("{dsp_product_name}", selectedProductCart.name)
+    .replace("{dsp_product_price}", `$${selectedProductCart.price}.00`)
+    .replace("{dsp_product_quantity}", selectedProductCart.quantity);
+}
+function handleCartInsertion() {
+  let cartInsertion = document.getElementById("cart_product_insertion");
+  if (cartInsertion) {
+    cartInsertion.innerHTML += objectsInCart.productHTML.join("");
+  }
+}
+function addProductToCart() {
+  let getCart = document.getElementById("get_cart");
+  let addToCart = document.getElementById("add_to_cart");
+  
+  addToCart.addEventListener("click", () => {
+    selectedProductCart = localStorage.getItem("selectedProduct");
+    selectedProductCart = JSON.parse(selectedProductCart);
     openCart();
+
+    renderProduct();
+    let closeCartBtn = document.getElementById("close_cart_btn");
+    closeCartBtn.addEventListener("click", () => {
+      closeCart();
+    });
+
+    if (!objectsInCart.productHTML.includes(productHTML)) {
+    objectsInCart.productAPIdata.push(selectedProductCart);
+    objectsInCart.productHTML.push(productHTML);
+    console.log(objectsInCart.productAPIdata);
+    console.log(objectsInCart.productHTML);
+    } else {
+      popModal("var(--secondary-color)", "Este producto ya está en tu carrito");
+    }
+
+    deleteProduct();
+    handleCartInsertion();
+    increaseProductCount()
+    decreaseProductCount()
+    computateValues()
+    suscribeToEmail()
+    confirmPurchase()
+    updateProductsCount();
+
+    /* if (objectsInCart.productHTML.includes(productHTML)) {
+      popModal("risk", "Este producto ya está en tu carrito");
+    } */
   });
 }
-function popModal(type,warning) {
-  let modal = document.querySelector('.modal')
+function deleteProduct() {
+  let cartInsertion = document.getElementById("cart_product_insertion");
+
+  cartInsertion.addEventListener("click", (e) => {
+    if (e.target.classList.contains("fa-trash-can")) {
+      let productContainer = e.target.closest(".product");
+      let productNameElement = productContainer.querySelector(".product-name");
+
+      if (productNameElement) {
+        const productName = productNameElement.textContent;
+
+        const selectedProductIndex = objectsInCart.productHTML.findIndex(
+          (item) => item.includes(productName)
+        );
+
+        if (selectedProductIndex !== -1) {
+          objectsInCart.productHTML.splice(selectedProductIndex, 1);
+          objectsInCart.productAPIdata.splice(selectedProductIndex, 1);
+
+          // Eliminar el producto del DOM
+          productContainer.remove(); // Eliminamos directamente el elemento del DOM
+
+          // Actualizar el contador de productos
+          updateProductsCount();
+        }
+      }
+    }
+    computateValues()
+  });
+}
+function increaseProductCount() {
+  let cartInsertion = document.getElementById("cart_product_insertion");
+  cartInsertion.addEventListener("click", (e) => {
+    if (e.target.classList.contains("fa-angle-up")) {
+      let quantityForIncrease = e.target.closest(".quantity");
+      let productContainer = e.target.closest(".product");
+      let productIndex = Array.from(cartInsertion.children).indexOf(productContainer);
+      let quantitySelector = quantityForIncrease.querySelector(".product-quantity");
+      let quantityText = parseInt(quantitySelector.textContent);
+      console.log(productIndex)
+      console.log(Number(objectsInCart.productAPIdata[productIndex].quantity))
+
+      if (quantityText < Number(objectsInCart.productAPIdata[productIndex].quantity)) {
+        quantitySelector.textContent = quantityText + 1;
+      } else {
+        popModal("var(--primary-color)", "Lo sentimos, no hay más de este producto en stock")
+      }
+    }
+  });
+}
+function decreaseProductCount() {
+  let cartInsertion = document.getElementById("cart_product_insertion");
+  cartInsertion.addEventListener("click", (e) => {
+    if (e.target.classList.contains("fa-angle-down")) {
+      let quantityForIncrease = e.target.closest(".quantity");
+      let productId = e.target.closest(".product");
+      let quantitySelector = quantityForIncrease.children[1]
+      let quantityText = quantityForIncrease.children[1].textContent
+      if (quantityText > 0) {
+        quantitySelector.textContent = Number(quantityText) -1
+      } else {
+        popModal("var(--primary-color)","debes seleccionar al menos 1 producto")
+      }
+    }
+  });
+  
+  /* let productContainer = e.target.closest(".product");
+  let upArrow = productContainer.querySelector("fa-angle-up"); */
+}
+function updateProductsCount() {
+  let getProductNumberDisplay = document.querySelector(
+    "#get_product_number_display"
+  );
+  getProductNumberDisplay.textContent = objectsInCart.productHTML.length;
+}
+function computateValues() {
+  let cartInsertion = document.getElementById("cart_product_insertion");
+  let subTotal = document.getElementById('sub_total');
+  let shipping = document.getElementById('shipping');
+  let total = document.getElementById('total');
+  let insertedChildren = Array.from(cartInsertion.children)
+
+  let quantitiesAdded = document.querySelectorAll('.product-quantity')
+  let numberOfQuantities = []
+  quantitiesAdded.forEach(element => {
+    numberOfQuantities.push(Number(element.firstChild.textContent))
+  });
+  console.log(numberOfQuantities)
+  /* console.log(objectsInCart.productHTML.some(e=> insertedChildren.includes(e) )) */
+  /* console.log(objectsInCart.productHTML.filter((e,i)=> e===insertedChildren[0].outerHTML && i))
+  console.log(insertedChildren[0].outerHTML)
+  console.log(objectsInCart.productHTML[0]) */
+  let subTotalValue = objectsInCart.productAPIdata.reduce((a,b)=> a + Number(b.price),0)
+  let shippingVaue = subTotalValue>0 ? 7 : 0
+  subTotal.textContent = `Sub total: $${insertedChildren.length>0 && subTotalValue}.00`
+  shipping.textContent = `Envío: $${shippingVaue}.00`
+  total.textContent = `Total: $${subTotalValue + shippingVaue}.00`
+
+  
+}
+function popModal(type, warning) {
+  let modal = document.querySelector(".modal");
   let cartActivator = document.querySelector(".fa-cart-shopping");
-  
-  
-    modal.classList.add('popModal')
-    modal.setAttribute('style','background-color: var(--color-base);')
-  
-    cartActivator.classList.add("fa-shake");
-    setTimeout(() => {
-      cartActivator.classList.remove("fa-shake");
-    }, 800);
-    setTimeout(() => {
-      modal.classList.remove('popModal')
-    }, 3000);
+  let warnMessage = modal.firstElementChild.lastElementChild
+
+  warnMessage.textContent = warning
+  modal.classList.add("popModal");
+  modal.setAttribute("style", `background-color: ${type};`);
+
+  cartActivator.classList.add("fa-shake");
+  setTimeout(() => {
+    cartActivator.classList.remove("fa-shake");
+  }, 800);
+  setTimeout(() => {
+    modal.classList.remove("popModal");
+  }, 3000);
 }
 function openCart() {
   let getCart = document.getElementById("get_cart");
@@ -136,7 +271,7 @@ function openCart() {
   setTimeout(() => {
     cartActivator.classList.remove("fa-bounce");
   }, 800);
-  isCarOpen = true
+  isCarOpen = true;
 }
 function closeCart() {
   let getCart = document.getElementById("get_cart");
@@ -144,13 +279,13 @@ function closeCart() {
 
   getNavBar.classList.remove("adjust_border_radius");
   getCart.classList.remove("show_cart");
-  
+
   //controla el movimiento del carrito al agregar un producto
   cartActivator.classList.add("fa-beat-fade");
   setTimeout(() => {
     cartActivator.classList.remove("fa-beat-fade");
   }, 800);
-  isCarOpen = false
+  isCarOpen = false;
 }
 function toggleCart() {
   let cartActivator = document.querySelector(".fa-cart-shopping");
@@ -160,6 +295,24 @@ function toggleCart() {
 //desplegamos las funciones que necesitaremos
 function openStore() {
   getStore.firstElementChild.classList.add("store_visible");
+}
+function suscribeToEmail() {
+  let suscribeBtn = document.querySelector('.susbribe_button')
+  if (suscribeBtn) {
+    suscribeBtn.addEventListener('click', () => {
+      popModal('green','Gracias por suscribirte :D ')
+    })
+  }
+  
+}
+function confirmPurchase() {
+  let confirmBtn = document.querySelector('.confirm-btn')
+  if (confirmBtn) {
+    confirmBtn.addEventListener('click', () => {
+      popModal('green','Apreciamos tu compra')
+    })
+  }
+  
 }
 // Realizamos una petición a la API de Academlo para obtener los datos de los productos
 async function fetchProducts() {
@@ -200,6 +353,7 @@ async function fetchProducts() {
 
     // Renderizamos todos los productos iniciales en el DOM
     getProducts.innerHTML = renderProducts(data);
+    
 
     // Manejamos el cambio en la selección de categorías
     getSelect.addEventListener("change", (event) => {
@@ -210,7 +364,7 @@ async function fetchProducts() {
         const filteredProducts = data.filter(
           (product) => product.category === selectedCategory
         );
-        arrProductsByCategory = filteredProducts
+        arrProductsByCategory = filteredProducts;
         getProducts.innerHTML = renderProducts(filteredProducts);
       }
     });
@@ -238,12 +392,11 @@ async function fetchProducts() {
             .replace("{dsp_product_price}", `$${selectedProduct.price}.00`)
             .replace("{dsp_product_category}", selectedProduct.category)
             .replace("{dsp_product_image}", selectedProduct.image)
-            .replace("{dsp_product_description}",selectedProduct.description)
+            .replace("{dsp_product_description}", selectedProduct.description)
             .replace("{dsp_product_quantity}", selectedProduct.quantity)
             .replace("{dsp_product_image2}", selectedProduct.image);
           getStore.innerHTML = modifiedHTML;
           openStore();
-          
         } else {
         }
 
@@ -269,7 +422,7 @@ async function fetchProducts() {
     let relatedProductsHTML = `<div class="store_product_container" id="related_product_01">
                                     <img src="{dsp_related_image}" alt="" class="store_product_img">
                                     <p class="store_product_text_related">{dsp_related_name}</p>
-                                </div>`
+                                </div>`;
 
     let storeHtmlTemplate = `<div class="appendedHTML_container theme">
     <section class="products_section">
@@ -329,28 +482,36 @@ async function fetchProducts() {
       </section>
     </section>
     
-    </div>`
-
-  
-   function genareteRelatedProducts() {
-    function generateRandomNum() {
-      let randomProd = Math.floor(Math.random()*17)
-      return randomProd
-    }
+    </div>`;
     
-      for (let i = 0; i < 5; i++) {
-        arrProductsByCategory.push(data[generateRandomNum()])
+    function genareteRelatedProducts() {
+      function generateRandomNum() {
+        let randomProd = Math.floor(Math.random() * 17);
+        return randomProd;
       }
-    
-    return arrProductsByCategory
-   }
-   let relatedProducts = genareteRelatedProducts()
-   
 
-    let storeHTML = storeHtmlTemplate.replace("{dsp_related_products}", Array(5).fill(relatedProductsHTML).map((e,i)=>e.replace("{dsp_related_image}",relatedProducts[i].image).replace("{dsp_related_name}",relatedProducts[i].name)).join(''))
+      for (let i = 0; i < 5; i++) {
+        arrProductsByCategory.push(data[generateRandomNum()]);
+      }
+
+      return arrProductsByCategory;
+    }
+    let relatedProducts = genareteRelatedProducts();
+
+    let storeHTML = storeHtmlTemplate.replace(
+      "{dsp_related_products}",
+      Array(5)
+        .fill(relatedProductsHTML)
+        .map((e, i) =>
+          e
+            .replace("{dsp_related_image}", relatedProducts[i].image)
+            .replace("{dsp_related_name}", relatedProducts[i].name)
+        )
+        .join("")
+    );
+    
   } catch (error) {
     console.error(error);
   }
 }
-
 fetchProducts();

@@ -28,8 +28,6 @@ body {
     visibility: 0;
     overflow: hidden;
     z-index: -1;
-    
-    
 }
 
 /* Loader que aparece al inicio de la pagina, esto no es necesario pero al guardar el tema en el localStorage presenta algunos problemas que de momento un simple loader puede camuflar */
@@ -68,52 +66,50 @@ body {
   display: grid;
   place-items: center;
   width: 340px;
-  padding: 10px;  
+  padding: 30px;  
   height: 50px;
   position: fixed;
   top: 50px;
-  right: 0px;
+  right: -400px;
   opacity: 0;
   visibility: hidden;
+  /* display: none; */
   z-index: 500;
   transition: 0.5s;
   border-radius: 20px;
+  color: white;
 }
 .modal_center {
   visibility: hidden;
+  /* display: none; */
   opacity: 1;
   display: grid;
+  right: inherit;
   place-items: center;
   height: 50px;
   border-radius: 20px;
-  color: black;
+  
   z-index: 501;
 }
 .modal_title {
   visibility: visible;
   font-size: 25px;
-  color: black;
+  
 }
 .modal_warning {
   visibility: visible;
   font-size: 20px;
-  color: black;
+  
 }
 
 /* pop Modal */
 
 .popModal {
-
+  right: 20px;
+  display: block;
   visibility: visible;
   opacity: 1;
-  transition: 0.5s
-}
-.modal_red {
-  background-color: red;
-}
-.moda_yellow {
-  background-color: yellow;
-}
-.modal_green{
-  background-color: green;
+  transition: 0.5s;
+  transition-delay: visibility 10s;
+  transition-delay: right 1.2s;
 }

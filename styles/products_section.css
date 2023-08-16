@@ -3,7 +3,7 @@ main {
     background-color:  white;
     display: flex;
     flex-direction: column;
-    /* height: 1350px; */
+    height: 1355px; 
     padding: var(--padding-X2);
     box-sizing: var(--forced-contain);
     box-sizing: var(--forced-contain);
@@ -67,11 +67,12 @@ main {
                 width: 100%;
                 height: 300px;
                 object-fit: contain;
-                filter: drop-shadow(5px 5px 1px #04040a87);       
+                filter: drop-shadow(5px 5px 1px #04040a46);       
             }
             .product_img:hover {
-                filter: drop-shadow(5px 5px 1px #04040a);
-                transform: scale(1.1);
+                filter: drop-shadow(5px 5px 1px #04040a84);
+
+                transform: scale(1.02);
                 transition: 1s;
             }
             .price {

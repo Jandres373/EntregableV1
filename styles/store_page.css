@@ -168,6 +168,7 @@
 }
 .colored_frame {
     width: 300px;
+    height: 85%;
     margin-left: 250px;
     background-color: #eb4a5a;
 }
