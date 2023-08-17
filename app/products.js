@@ -16,17 +16,15 @@ let objectsInCart = { productAPIdata: [], productHTML: [] ,  amount: []  };
 let selectedProductCart;
 let productHTML;
 let getProductNumberDisplay;
+let totalPurchased;
 
 
 cartActivator.addEventListener("click", () => {
   toggleCart();
 });
 getMore.addEventListener("click", () => {
-  expandProducts();
+  
 });
-function expandProducts() {
-  getProducts.classList.toggle("expand_products");
-}
 function renderProduct() {
   let getCart = document.getElementById("get_cart");
   getProductNumberDisplay = document.querySelector(
@@ -54,9 +52,9 @@ function renderProduct() {
     <div id="cart-insert-product" class="cart-display-selected-products">
     </div>
     <div class="cart-total">
-      <p id="sub_total" class="total-line">Subtotal: $</p>
-      <p id="shipping" class="total-line">Envío: $</p>
-      <p id="total" class="total-line">Total: $</p>
+      <p id="sub_total" class="total-line"><span class="plane_text">Subtotal:</span> $</p>
+      <p id="shipping" class="total-line"><span class="plane_text">Envío:</span> $</p>
+      <p id="total" class="total-line"><span class="plane_text">Total:</span> $</p>
     </div>
     <div class="contact-data">
       <h2>Datos de Contacto</h2>
@@ -87,6 +85,7 @@ function renderProduct() {
       <button class="confirm-btn" type="button">Confirmar Compra</button>
       <button class="continue-shopping-btn" type="button">Continuar Comprando</button>
     </div>
+    <div class="spacer"></div>
   </div>
 </body>
 `;
@@ -249,6 +248,7 @@ function computateValues() {
   subTotal.textContent = `Sub total: $${subTotalValue.toFixed(2)}`;
   shipping.textContent = `Envío: $${shippingValue.toFixed(2)}`;
   total.textContent = `Total: $${(subTotalValue + shippingValue).toFixed(2)}`;
+  totalPurchased = subTotalValue.toFixed(2)
 }
 
 function popModal(type, warning) {
@@ -320,7 +320,12 @@ function confirmPurchase() {
   let confirmBtn = document.querySelector('.confirm-btn')
   if (confirmBtn) {
     confirmBtn.addEventListener('click', () => {
-      popModal('green','Apreciamos tu compra')
+      
+      if (totalPurchased>0) {
+        popModal('green','Apreciamos tu compra')
+      } else {
+        popModal('red','La cantidad seleccionada es 0')
+      }
     })
   }
   
@@ -383,6 +388,8 @@ async function fetchProducts() {
     // Agregamos el evento click para ver detalles de un producto
     getProducts.addEventListener("click", (event) => {
       if (event.target.classList.contains("product_view")) {
+          
+       
         const selectedProductElement = event.target.parentElement;
         const selectedProductId = parseInt(selectedProductElement.id);
         const selectedProduct = data.find(
@@ -420,8 +427,10 @@ async function fetchProducts() {
 
         addProductToCart();
 
+        
+
         return selectedProduct;
-      }
+      } 
     });
 
     //store

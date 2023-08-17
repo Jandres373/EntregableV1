@@ -60,7 +60,6 @@ footer {
         .footer_developers_container{
             padding: 40px 0 0 0;
             color: var(--color-base);
-            
             text-align: center;
             font-size: 15px;
             
@@ -82,17 +81,18 @@ footer {
 
         .footer_developers_container p{
           
-
           font-family: var(--font-subtitle);
           font-size: var(--size-button-and-body);
         }
-        .footer_developers_container .footer_developers{
-            margin: 10px 5px;
+         .footer_developers{
+            padding: 10px 5px 10px 0;
             box-sizing: border-box;
             width: 100%;
             display: flex;
+            
+            margin: 0 auto;
             gap: 20px;
-            text-align: center;
+            
             
         }
 

@@ -4,7 +4,6 @@
 .red_mode {
   background-color: var(--primary-color);
   color: var(--color-base);
-  
 }
 /* Light Mode Styles */
 .light_mode {
