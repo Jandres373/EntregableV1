@@ -213,7 +213,7 @@
     grid-template-columns: repeat(5, 1fr);
     object-fit: contain;
     gap: 20px;
-    max-height: 260px;
+    max-height: 280px;
     overflow-y: hidden;
     overflow-x: scroll;
     
@@ -390,3 +390,16 @@ main {
         
     }
   }
+
+
+  @media screen and (max-width: 1268px) {
+  .store_products_display_container {
+    /* Cambia la disposición para mostrar los productos en una columna */
+    display: flex;
+    
+    gap: 100px;
+    width: 1200px;
+    max-height: none; /* Restablece la altura máxima */
+    overflow-x: scroll;
+  }
+}

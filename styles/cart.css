@@ -132,14 +132,14 @@
     border-radius: 10px;
     margin-top: 20px;
     padding: 20px;
-    /* border: 1px solid #ddd; */
     background-color: #fff;
     font-size: 16px;
-    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); */
   }
   
   .cart-total .total-line {
     margin: 5px 0;
+    font-family: var(--font-subtitle);
+    
   }
   .cart-total {
     display: flex;
@@ -161,7 +161,7 @@
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
-    box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+    box-sizing: border-box; 
   }
   .buttons {
     display: flex;
@@ -176,8 +176,8 @@
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    width: 45%; /* Divide el ancho disponible en dos botones */
-    box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+    width: 45%; 
+    box-sizing: border-box; 
   }
   
   .confirm-btn {
@@ -187,10 +187,12 @@
     padding: 10px 20px;
     margin-right: 10px;
     cursor: pointer;
-    width: 45%; /* Divide el ancho disponible en dos botones */
-    box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+    width: 45%; 
+    box-sizing: border-box; 
   }
-  
+  .spacer {
+    height: 50px;
+  }
   /* Media queries para ajustar los botones en pantallas pequeñas */
   @media (max-width: 768px) {
     .buttons {
@@ -199,7 +201,7 @@
   
     .confirm-btn,
     .continue-shopping-btn {
-      color:#3498db;
+      color:white;
       width: 100%;
       margin-right: 0;
       margin-bottom: 10px;

@@ -54,9 +54,9 @@ function renderProduct() {
     <div id="cart-insert-product" class="cart-display-selected-products">
     </div>
     <div class="cart-total">
-      <p id="sub_total" class="total-line">Subtotal: $</p>
-      <p id="shipping" class="total-line">Envío: $</p>
-      <p id="total" class="total-line">Total: $</p>
+      <p id="sub_total" class="total-line"><span class="plane_text">Subtotal:</span> $</p>
+      <p id="shipping" class="total-line"><span class="plane_text">Envío:</span> $</p>
+      <p id="total" class="total-line"><span class="plane_text">Total:</span> $</p>
     </div>
     <div class="contact-data">
       <h2>Datos de Contacto</h2>
@@ -87,6 +87,7 @@ function renderProduct() {
       <button class="confirm-btn" type="button">Confirmar Compra</button>
       <button class="continue-shopping-btn" type="button">Continuar Comprando</button>
     </div>
+    <div class="spacer"></div>
   </div>
 </body>
 `;
