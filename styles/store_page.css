@@ -216,7 +216,7 @@
     max-height: 280px;
     padding: 20px 0;
     overflow-y: hidden;
-    overflow-x: scroll;
+    overflow-x: hidden;
     
 }
 
@@ -366,9 +366,9 @@ main {
       display: flex;
       padding-left: 25px;
       gap: 100px;
-      width: 1200px;
+      width: 100%;
       max-height: none; /* Restablece la altura máxima */
-      overflow-x: scroll;
+      overflow-x: hidden;
     }
   
     .store_product_container {
