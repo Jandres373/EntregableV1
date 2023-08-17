@@ -6,14 +6,14 @@
     top: 55px;
     right: -1850px;
     z-index: 0;
-    transition: 0.5s;
     box-sizing: border-box;
     color: black;
     padding: 0 200px;
     scroll-snap-align: start;
+    transition: 0.5s;
 }
 .store_visible {
-    right: 0px !important;
+    right: 0px ;
     transition: 0.5s;
 }
 
@@ -214,6 +214,7 @@
     object-fit: contain;
     gap: 20px;
     max-height: 280px;
+    padding: 20px 0;
     overflow-y: hidden;
     overflow-x: scroll;
     
@@ -223,7 +224,6 @@
     position: relative;
     max-width: fit-content;
     height: 250px;
-    box-shadow: 1px 1px 2px rgba(128, 128, 128, 0.174);
     border-radius: 8px;
     overflow: hidden;
 }
@@ -274,6 +274,7 @@ margin: 0 10px;
     width: 200px;
     height: 42px;
     background-color: #274672;
+    border-radius: 6px;
     border: none;
     color: white;
     font-weight: 900;
@@ -363,7 +364,7 @@ main {
     .store_products_display_container {
       /* Cambia la disposición para mostrar los productos en una columna */
       display: flex;
-      
+      padding-left: 25px;
       gap: 100px;
       width: 1200px;
       max-height: none; /* Restablece la altura máxima */
@@ -373,12 +374,14 @@ main {
     .store_product_container {
       width: 100%; /* Ocupa todo el ancho disponible */
       height: auto; /* Ajusta la altura automáticamente */
+      box-shadow: none;
       
     }
     .store_email_suscription_container {
         display: grid;
         place-items: center;
         text-align: center;
+        gap: 5px;
     }
     .suscribe_input{
         width: 260px;
@@ -402,4 +405,10 @@ main {
     max-height: none; /* Restablece la altura máxima */
     overflow-x: scroll;
   }
+  .store_product_container {
+    
+    box-shadow: none;
+    
+  }
+
 }

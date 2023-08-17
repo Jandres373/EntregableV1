@@ -94,6 +94,7 @@
   .fa-angle-up{
   font-size: 20px;
   margin: 0 5px ;
+  cursor: pointer;
   }
   
   .quantity-btn {
